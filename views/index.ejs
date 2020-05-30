@@ -81,7 +81,7 @@ body {
 <body style="height: 100%">
 <!-- Vertical navbar -->
 
-<div class="vertical-nav bg-white" id="sidebar" >
+<div class="vertical-nav bg-white" id="sidebar" style="height: 100%;" >
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center"><img src="http://lh3.googleusercontent.com/JI03c8U3TElg-SP9FbTPtIjEzNafWyLSxy89HmFrTE8_-oEbe0C_kuKbG8yDKQUoCqE=w300" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
@@ -140,7 +140,7 @@ body {
 		<form action="/index" method="post">
 			<div class="card text-white bg-info mb-3" style="max-width: 18rem;margin-left: 9%;">
                 <div class="card-header"><label >Task:</label>
-                  <input type="text" name="newItem" placeholder="task" required></div>
+                  <input type="text" name="newItem" placeholder="task" required autocomplete="off"></div>
                 <div class="card-body">
                 <h6 class="card-text"><label >Due Date:</label><input type="date" name="dueDate" required></h6>
              <p class="card-text"><label >Category:</label><select name="label">

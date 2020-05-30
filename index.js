@@ -21,7 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //mongoose.connect("mongodb://localhost:27017/todolistdb",{useNewUrlParser:true});
-mongoose.connect("mongodb://localhost:27017/usersdb",{useNewUrlParser:true});
+mongoose.connect("mongodb+srv://ketaki:test123@cluster0-xrczy.mongodb.net/usersdb",{useNewUrlParser:true});
 mongoose.set("useCreateIndex",true);
 const itemsSchema = new mongoose.Schema({
   name: String,
@@ -237,7 +237,7 @@ app.post("/index",function(req,res)
   res.redirect("/index");
 });
 
-app.listen(3000,function()
+app.listen(process.env.PORT || 3000,function()
 {
   console.log("Server 3000");
 });
