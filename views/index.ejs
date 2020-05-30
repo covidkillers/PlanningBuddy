@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<style type="text/css">
+.vertical-nav {
+  min-width: 16%;
+  width: 16%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+  
+}
+
+#sidebar.active {
+  margin-left: -17rem;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -17rem;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+}
+
+body {
+  background: #599fd9;
+  background: -webkit-linear-gradient(to right, #599fd9, #c2e59c);
+  background: linear-gradient(to right, #599fd9, #c2e59c);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.separator {
+  margin: 3rem 0;
+  border-bottom: 1px dashed #fff;
+}
+
+.text-uppercase {
+  letter-spacing: 0.1em;
+}
+
+.text-gray {
+  color: #aaa;
+}
+
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</style>
+</head>
+<body style="height: 100%">
+<!-- Vertical navbar -->
+
+<div class="vertical-nav bg-white" id="sidebar" >
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center"><img src="http://lh3.googleusercontent.com/JI03c8U3TElg-SP9FbTPtIjEzNafWyLSxy89HmFrTE8_-oEbe0C_kuKbG8yDKQUoCqE=w300" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <h4 class="m-0">Planning Buddy</h4>
+        <p class="font-weight-light text-muted mb-0">Your personal planner</p>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <form action="/logout" method="get">
+      <button style="width: 100%;" class="nav-link text-dark font-italic bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw" ></i>
+                Logout
+            </button>
+            </form>
+    </li>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
+<form action="/logout" method="get">
+<button value="Logout" style="margin-left: 90%;margin-top: 1%;" class="button">Logout</button>
+</form>
+<div id="main" style="display: grid;grid-template-columns: 1fr 1fr 1fr;height: 100%;width: 84%; margin-left: 16%;margin-top: 1%;">
+	<div id="todo" style="background-color:#55c96a;height: 100%">
+		<div id="list">
+			<h1 style="text-align: center">To Do</h1>
+			<ul>
+          <% for(var i=0; i<newListItems.length;i++){ %>
+         <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+              <h5 class="card-header" style="text-transform: capitalize;"><%= newListItems[i].name %></h5>
+              <div class="card-body">
+              <h6 class="card-title"><%="Status: "+ newListItems[i].label %></h6>
+
+             <p class="card-text"><%= "Due Date: " +newListItems[i].due_date.getDate()+"/"+newListItems[i].due_date.getMonth()+"/"+newListItems[i].due_date.getFullYear() %></p>
+             <form action="/delete" method="post">
+             <label>Delete</label>
+             <input type="checkbox" name="checkbox" onchange="this.form.submit()" value="<%= newListItems[i]._id %>" >
+             </form>
+             <form action="/updateProgress" method="post">
+             <label>Mark As In Progress</label>
+             <input type="checkbox" name="checkbox3" onchange="this.form.submit()" value="<%= newListItems[i]._id %>" >
+             </form>
+             <form action="/updateComplete" method="post">
+             <label>Mark As Completed</label>
+             <input type="checkbox" name="checkbox2" onchange="this.form.submit()" value="<%= newListItems[i]._id %>" >
+              </form>
+             </div>
+            </div>
+            
+            <% } %>
+		</ul>
+		</div>
+		<form action="/index" method="post">
+			<div class="card text-white bg-info mb-3" style="max-width: 18rem;margin-left: 9%;">
+                <div class="card-header"><label >Task:</label>
+                  <input type="text" name="newItem" placeholder="task" required></div>
+                <div class="card-body">
+                <h6 class="card-text"><label >Due Date:</label><input type="date" name="dueDate" required></h6>
+             <p class="card-text"><label >Category:</label><select name="label">
+				<option>Personal</option>
+				<option>Work</option>
+				<option>Shopping</option>
+				<option>Others</option>
+			</select></p>
+			<button type="submit" name="button" style="border-radius: 2%;width: 50%">Add</button>
+             </div>
+            </div>
+     
+     	</form>
+	</div>
+	<div id="progress" style="background-color: #b2faa7;height: 100%;">
+	<h1 style="text-align: center;">In Progress</h1>
+	<ul>
+	<% for(var i=0; i<proListItems.length;i++){ %>
+        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <h5 class="card-header" style="text-transform: capitalize;"><%= proListItems[i].name %></h5>
+                <div class="card-body">
+                <h6 class="card-title"><%="Label: "+ proListItems[i].label %></h6>
+             <p class="card-text"><%="Due Date: "+ proListItems[i].due_date.getDate()+"/"+proListItems[i].due_date.getMonth()+"/"+proListItems[i].due_date.getFullYear()%></p>
+             <form action="/delete" method="post">
+             <label>Delete</label>
+             <input type="checkbox" name="checkbox" onchange="this.form.submit()" value="<%= proListItems[i]._id %>" >
+             </form>
+              <form action="/updateComplete" method="post">
+             <label>Mark As Completed</label>
+             <input type="checkbox" name="checkbox2" onchange="this.form.submit()" value="<%= proListItems[i]._id %>" >
+              </form>
+             </div>
+            </div>
+            <% } %>
+		</ul>
+    </div>
+	<div id="archive" style="background-color:#55c96a;height: 100%;">
+		<h1 style="text-align: center;">Archived</h1>
+		<ul>
+			     <% for(var i=0; i<oldListItems.length;i++){ %>
+        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <h5 class="card-header" style="text-transform: capitalize;"><%= oldListItems[i].name %></h5>
+                <div class="card-body">
+                <h6 class="card-title"><%="Label: "+ oldListItems[i].label %></h6>
+             <p class="card-text"><%="Due Date: "+ oldListItems[i].due_date.getDate()+"/"+oldListItems[i].due_date.getMonth()+"/"+oldListItems[i].due_date.getFullYear() %></p>
+               <form action="/delete" method="post">
+             <label>Delete</label>
+             <input type="checkbox" name="checkbox" onchange="this.form.submit()" value="<%= oldListItems[i]._id %>" >
+             </form>
+             </div>
+            </div>
+            <% } %>
+		</ul>
+		
+	</div>
+</div>
+</body>
+</html>
