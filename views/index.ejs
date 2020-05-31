@@ -76,6 +76,8 @@ body {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+
 </style>
 </head>
 <body style="height: 100%">
@@ -107,7 +109,7 @@ body {
 <form action="/logout" method="get">
 <button value="Logout" style="margin-left: 90%;margin-top: 1%;" class="button">Logout</button>
 </form>
-<div id="main" style="display: grid;grid-template-columns: 1fr 1fr 1fr;height: 100%;width: 84%; margin-left: 16%;margin-top: 1%;">
+<div id="main" style="display: grid;grid-template-columns: 1fr 1fr 1fr;height: 100%;width: 84%; margin-left: 16%;margin-top: 1%;min-height: 100%;overflow: auto;">
 	<div id="todo" style="background-color:#55c96a;height: 100%">
 		<div id="list">
 			<h1 style="text-align: center">To Do</h1>
@@ -197,5 +199,6 @@ body {
 		
 	</div>
 </div>
+
 </body>
 </html>
